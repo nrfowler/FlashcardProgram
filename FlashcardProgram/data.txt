@@ -1,0 +1,30 @@
+Thread is represented by the >>>> class
+	System.Threading.Thread
+Process is represented by an instance of the Process class in the ___ namespace
+	System.Diagnostics
+Task
+	Unit of potentially high latency work that produces a resultant value or side effect
+Time slice
+	Or "quantum" unit of time that a processor runs a  thread so as to mimic multithreading
+Context switch
+	Switching a thread
+Concurrent threads have to be invoked 
+	Asynchronously, because that is how control flow must work (two statements on separate lines)
+Atomic operations
+	Never externally visible as "in progress"
+System.Environment.FailFast()
+	Terminate the process and write a message to the Windows Application event log
+Caetch blocks must appear in order from most ___ to least ___
+	Specific
+All exceptions derive from
+	System.Exception
+Java exception specifiers
+	You must know what exceptions a class or method must throw. Reflection or late binding makes this infeasible
+Access modifier
+Id's the level of encapsulation
+428
+649-675
+456-493
+373
+398
+153
