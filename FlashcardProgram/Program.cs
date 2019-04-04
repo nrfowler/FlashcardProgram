@@ -4,6 +4,7 @@ using System.Text;
 using System.Collections;
 using System.Text.RegularExpressions;
 using FlashcardProgram.Properties;
+using static FlashcardProgram.StringArray;
 
 namespace HelloWorld
 {
@@ -13,10 +14,50 @@ namespace HelloWorld
         {
             if (args[0] == "fc")
                 FlashCard.FlashCards();
+            else if (args[0] == "rc")
+                ReadingComprehension();
             else if (args[0] == "wm")
                 WorkingMemory(int.Parse(args[1]), int.Parse(args[2]), bool.Parse(args[3]));
             //else if (args[0] == "mn")
             //    PhoneticSystem();
+
+        }
+
+        private static void ReadingComprehension()
+        {
+            var pronoun = new string[]{ "My" };
+            var pronoun2 = new string[] { "your ", "my opponents " };
+
+            var patriot = new string[] { "George Washington's","Donald Trump's","Lincoln's" };
+            var subj = new string[]{ "idea", "novel", "essay", "article", "work", "speech", "platform" ,"comment"};
+            var verbclause =  new string[]{ "implies","denies","questions","ignores","muses","recommends", "warns"};
+            var topic = new string[]{ "federal penitentaries", "politicians", "wars abroad", "black people",
+                "we","robot factories","blustery nights","Globalists","Colbert writers" };
+            var verbMoney = new string[] { "spend", "waste","distribute to citizens","give back to taxpayers",
+            "socialize"};
+            var verbPerson = new string[] {"exploit", "sell to China","promote","inhibit","convince","hire","fire","follow","lead"};
+            var adj = new string[] { "too much money", "just the right amount of money", "an unknown amount of money", "too many lives",
+            "human resources","soil fertility","precious moments"};
+            var quan = new string[] { "\n","."};
+            var Person = new string[] { "teachers", "lawyers", "politicians", "doctors", "workers" };
+            //, "medicaid resources", "benefits", "missle launchers", "Universal Basic Income stamps"
+            //instead of -- verb adj quan or adj quan
+            var prep = new string[] { "However, ", "Instead, " };
+
+            while (true)
+            {
+
+                Console.WriteLine(pronoun[RandomInteger(pronoun.Length)] + " " + subj[RandomInteger(subj.Length)] + "\n" + verbclause[RandomInteger(verbclause.Length)] +
+                    " that " + topic[RandomInteger(topic.Length)] + "\n" + verbMoney[RandomInteger(verbMoney.Length)] + " " + adj[RandomInteger(adj.Length)] + " \n" +
+                    quan[RandomInteger(quan.Length)] + ".\n" +
+                    prep[RandomInteger(prep.Length)]
+                + pronoun2.Rand()+subj.Rand()+" "+verbclause.Rand()+"\nthat "+topic.Rand()
+                +" "+verbPerson.Rand()+" "+Person.Rand()+".\nNot in "+patriot[RandomInteger(patriot.Length)]+ " America!");
+                
+            Console.Read();
+                Console.Clear();
+            }
+            
 
         }
 
@@ -61,6 +102,12 @@ namespace HelloWorld
         {
             return (new Random().Next() + start) % (stop + level);
         }
+        private static int RandomInteger(int level)
+        {
+            return (new Random().Next()) % (level);
+        }
+
+        
 
         private static void WorkingMemory(int total, int MaxPkgs, bool KeepScore)
         {
