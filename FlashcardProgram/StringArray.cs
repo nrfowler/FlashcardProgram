@@ -8,9 +8,15 @@ namespace FlashcardProgram
 {
     public static class StringArray
     {
+        private static readonly Random random = new Random();
+        private static readonly object syncLock = new object();
+
         public static string Rand(this string[] ob)
         {
-            return ob[(new Random().Next()) % (ob.Length)];
+            lock (syncLock)
+            { // synchronize
+                return ob[(random.Next()) % (ob.Length)];
+            }
         }
     }
 }
