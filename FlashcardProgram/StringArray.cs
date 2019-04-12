@@ -11,11 +11,18 @@ namespace FlashcardProgram
         private static readonly Random random = new Random();
         private static readonly object syncLock = new object();
 
-        public static string Rand(this string[] ob)
+        public static string Rand(this object[] ob)
         {
             lock (syncLock)
             { // synchronize
-                return ob[(random.Next()) % (ob.Length)];
+                return (string) ob[(random.Next()) % (ob.Length)];
+            } 
+        }
+        public static int RandInt(this object[] ob)
+        {
+            lock (syncLock)
+            { // synchronize
+                return (int)ob[(random.Next()) % (ob.Length)];
             }
         }
     }

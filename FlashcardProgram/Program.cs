@@ -19,11 +19,98 @@ namespace HelloWorld
             else if (args[0] == "ph")
                 PhoneticDictionary();
             else if (args[0] == "wm")
-                WorkingMemory(int.Parse(args[1]), int.Parse(args[2]), bool.Parse(args[3]));
+                WorkingMemory(10, 2, true);//keep constant at this value for accurate stats
+            else if (args[0] == "celeb")
+                CelebrityMneumonicSystem();
+            //WorkingMemory(int.Parse(args[1]), int.Parse(args[2]), bool.Parse(args[3]));
             //else if (args[0] == "mn")
             //    PhoneticSystem();
 
         }
+        //contains a list of 00-99 user created celebrity names for use in a mneumonic system
+        private static void CelebrityMneumonicSystem()
+        {
+
+            Console.WriteLine("Review old number assoc'ns (r) or make new ones (n)?");
+            var input = Console.ReadLine();
+            if (input == "r")
+            {
+                var lines = File.ReadAllLines("celeb.text");
+                var cont = true;
+                while (cont)
+                {
+
+                    string item = (string)lines.Rand();
+                    Console.WriteLine(item.Split(new char[] { ';' })[0]);
+                    var response = Console.ReadLine();
+
+                    string value = item.Split(new char[] { ';' })[1];
+                    if (response == value)
+                    {
+                        Console.WriteLine("Correct!");
+
+                    }
+                    else
+                        Console.WriteLine("Wrong-value is " + value);
+                    Console.WriteLine("Continue?");
+                    var foo = Console.ReadLine();
+                    if (foo == "n")
+                    {
+                        cont = false;
+                    }
+                    else
+                    {
+                        cont = true;
+                    }
+                }
+            }
+            else if (input == "n")
+            {
+                var lines = File.ReadAllLines("pd.text");
+                var nums = new ArrayList();
+                foreach (string line in lines)
+                {
+                    nums.Add(line.Split(new char[] { ';' })[0]);
+
+                }
+
+                var cont = true;
+                while (cont)
+                {
+                    string randomnum;
+                    do
+                    {
+                        var numarray = new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+                        //var digits = new string[] { "2", "3", "4", "7" }.Rand();
+                        randomnum = numarray.Rand() + numarray.Rand();
+                    } while (nums.Contains(randomnum));
+
+                    Console.WriteLine(randomnum + "\n");
+                    var word = Console.ReadLine();
+                    if (word.Length > 1)
+                    {
+                        var line = randomnum + ";" + word;
+                        File.AppendAllLines("celeb.text", new string[] { line });
+
+
+                    }
+
+                    Console.WriteLine("Continue?");
+                    var foo = Console.ReadLine();
+                    if (foo == "n")
+                    {
+                        cont = false;
+                    }
+                    else
+                    {
+                        cont = true;
+                    }
+                }
+            }
+            //import phonetic.txt
+            //random number and then append to text file
+        }
+
         //A flashcard game for memorizing numners using the Phonetic Mneumonic System
         private static void PhoneticDictionary()
         {
@@ -37,7 +124,7 @@ namespace HelloWorld
                 while (cont)
                 {
 
-                    string item = lines.Rand();
+                    string item = (string)lines.Rand();
                     Console.WriteLine(item.Split(new char[] { ';' })[0]);
                     var response = Console.ReadLine();
 
@@ -77,9 +164,29 @@ namespace HelloWorld
                     do
                     {
                         var numarray = new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-                         randomnum = numarray.Rand() + numarray.Rand() + numarray.Rand() + numarray.Rand();
+                        var digits = new string[] { "2", "3", "4","7" }.Rand();
+                        randomnum = numarray.Rand() + numarray.Rand();
+                        switch (digits) {
 
-                    } while (nums.Contains(int.Parse(randomnum)));
+                            case "3":
+                        randomnum = numarray.Rand() + numarray.Rand() + numarray.Rand();
+                                break;
+                        case "4":
+                         randomnum = numarray.Rand() + numarray.Rand() + numarray.Rand() + numarray.Rand();
+                                break;
+                        case "7":
+                            randomnum = numarray.Rand() + numarray.Rand() + numarray.Rand() + "-"+
+                                numarray.Rand() + numarray.Rand() + numarray.Rand() + numarray.Rand();
+                            break;
+
+                        }
+
+
+
+
+                        
+
+                    } while (nums.Contains(randomnum));
 
                      Console.WriteLine(randomnum + "\n");
                     var word = Console.ReadLine();
@@ -112,18 +219,19 @@ namespace HelloWorld
             var pronoun = new string[]{ "My" };
             var pronoun2 = new string[] { "your ", "my opponents " };
 
-            var patriot = new string[] { "George Washington's","Donald Trump's","Lincoln's" };
+            var patriot = new string[] { "George Washington's","Donald Trump's","Lincoln's" ,"South","North","Bill O'Reilly's"};
             var subj = new string[]{ "idea", "novel", "essay", "article", "work", "speech", "platform" ,"comment"};
             var verbclause =  new string[]{ "implies","denies","questions","ignores","muses","recommends", "warns"};
-            var topic = new string[]{ "federal penitentaries", "politicians", "wars abroad", "black people",
-                "we","robot factories","blustery nights","Globalists","Colbert writers" };
+            var topic = new string[]{ "federal penitentaries", "politicians", "labor unions","wars abroad", "black people",
+                "we","robot factories","blustery nights","Globalists","Colbert writers","Vogue editors","Alex Jones videos","CNN pundits" };
             var verbMoney = new string[] { "spend", "waste","distribute to citizens","give back to taxpayers",
             "socialize"};
-            var verbPerson = new string[] {"exploit", "sell to China","promote","inhibit","convince","hire","fire","follow","lead"};
+            var verbPerson = new string[] {"exploit", "sell off","promote","inhibit","convince","hire","fire","follow","lead",
+            "mislead"};
             var adj = new string[] { "too much money", "just the right amount of money", "an unknown amount of money", "too many lives",
-            "human resources","soil fertility","precious moments"};
+            "human resources","soil fertility","precious moments","global warming credits","tax returns"};
             var quan = new string[] { "\n","."};
-            var Person = new string[] { "teachers", "lawyers", "politicians", "doctors", "workers" };
+            var Person = new string[] { "teachers", "lawyers", "politicians", "doctors", "workers","labor unions"};
             //, "medicaid resources", "benefits", "missle launchers", "Universal Basic Income stamps"
             //instead of -- verb adj quan or adj quan
             var prep = new string[] { "However, ", "Instead, " };
@@ -170,10 +278,11 @@ namespace HelloWorld
 
         private static bool MentalMath(int level=0)
         {
-            int top = RandomInteger(3,20,level);
-            int bottom = RandomInteger(3, 20, level);
-            Console.WriteLine("Compute: " + top.ToString() + "*" + bottom.ToString() + ": ");
-            if (int.Parse(Console.ReadLine()) == top * bottom)
+            //currently just a square of int. will have nxm, and decimals for higher points
+            int top = RandomInteger(3,50,level);
+            //int bottom = RandomInteger(3, 50, level);
+            Console.WriteLine("Compute: " + top.ToString() + "*" + top.ToString() + ": ");
+            if (int.Parse(Console.ReadLine()) == top * top)
                 return true;
 
 
@@ -223,7 +332,7 @@ namespace HelloWorld
             }
             do
             {
-                level=PlayGame(level)+1;
+                level= PlayGame(level)+1;
                 level = level > MaxPkgs ? MaxPkgs : level; //function?
                 totalscore += level - 1;
 
