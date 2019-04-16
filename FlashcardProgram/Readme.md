@@ -7,3 +7,4 @@ a database or csv file of simple math questions used on IQ tests
 generic multiple choice question and answer database that constantly appends
 way to back up pd.text, etc.
 fix not recognizing duplicate issue
+a generic loop framework for games
