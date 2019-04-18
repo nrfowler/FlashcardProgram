@@ -23,7 +23,7 @@ namespace HelloWorld
             else if (args[0] == "celeb")
                 CelebrityMneumonicSystem();
             else if (args[0] == "ag")
-                ArithmeticGame(10,2);
+                ArithmeticGame(10,2,20);
             //else if (args[0] == "rc")
             //    ReadingComprehension();
             //WorkingMemory(int.Parse(args[1]), int.Parse(args[2]), bool.Parse(args[3]));
@@ -72,14 +72,14 @@ namespace HelloWorld
                 }
                 else if (input == "n")
                 {
-                    var lines = File.ReadAllLines("pd.text");
+                    var lines = File.ReadAllLines("celeb.text");
                     var nums = new ArrayList();
                     foreach (string line in lines)
                     {
                         nums.Add(line.Split(new char[] { ';' })[0]);
 
                     }
-
+                    
                     var cont = true;
                     while (cont)
                     {
@@ -238,7 +238,7 @@ namespace HelloWorld
         //Arithmetic game
         //totalQns: questions asked per round
         //digits: digits of both operands
-        private static void ArithmeticGame(int totalQns, int digits)
+        private static void ArithmeticGame(int totalQns, int digits, int minVal)
         {
 
          string OpType(string op){
@@ -271,12 +271,12 @@ namespace HelloWorld
                     {
                         for (int i = 0; i < totalQns; i++)
                         {
-                            var firstRandom = intList.RandInt(digits);
+                            var firstRandom = intList.RandInt(digits, minVal);
                             int secondRandom = 0;
                             if (opType == "2")
                                 secondRandom = firstRandom;
                             else
-                                secondRandom = intList.RandInt(digits);
+                                secondRandom = intList.RandInt(digits,minVal);
                             if (opType == "2")
                                 Console.WriteLine("{0}^2 = ", firstRandom);
                             else

@@ -18,34 +18,39 @@ namespace FlashcardProgram
                 return (string) ob[(random.Next()) % (ob.Length)];
             } 
         }
- 
-        public static int RandInt(this object[] ob, int length)
+        //length: number of digits
+        //minVal: minimum value, inclusive
+        public static int RandInt(this object[] ob, int length, int minVal)
         {
             var finalInt = 0;
-            lock (syncLock)
-            { // synchronize
-                finalInt += (int)ob[(random.Next()) % (ob.Length)];
-            }
-            if (length == 1)
-                return finalInt;
-            lock (syncLock)
-            { // synchronize
-                finalInt += 10 * (int)ob[(random.Next()) % (ob.Length)];
-            }
-            if (length == 2)
-                return finalInt;
-            lock (syncLock)
-            { // synchronize
-                finalInt += 100 * (int)ob[(random.Next()) % (ob.Length)];
-            }
-            if (length == 3)
-                return finalInt;
-            lock (syncLock)
-            { // synchronize
-                finalInt += 1000 * (int)ob[(random.Next()) % (ob.Length)];
-            }
-            if (length == 4)
-                return finalInt;
+            do
+            {
+                lock (syncLock)
+                { // synchronize
+                    finalInt += (int)ob[(random.Next()) % (ob.Length)];
+                }
+                if (length == 1)
+                    return finalInt;
+                lock (syncLock)
+                { // synchronize
+                    finalInt += 10 * (int)ob[(random.Next()) % (ob.Length)];
+                }
+                if (length == 2)
+                    return finalInt;
+                lock (syncLock)
+                { // synchronize
+                    finalInt += 100 * (int)ob[(random.Next()) % (ob.Length)];
+                }
+                if (length == 3)
+                    return finalInt;
+                lock (syncLock)
+                { // synchronize
+                    finalInt += 1000 * (int)ob[(random.Next()) % (ob.Length)];
+                }
+                if (length == 4)
+                    return finalInt;
+
+            } while (finalInt < minVal);
             return finalInt;
 
 
