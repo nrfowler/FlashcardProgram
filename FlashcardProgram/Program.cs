@@ -5,6 +5,7 @@ using System.Collections;
 using System.Text.RegularExpressions;
 using FlashcardProgram.Properties;
 using static FlashcardProgram.StringArray;
+using System.Diagnostics;
 
 namespace HelloWorld
 {
@@ -23,7 +24,10 @@ namespace HelloWorld
             else if (args[0] == "celeb")
                 CelebrityMneumonicSystem();
             else if (args[0] == "ag")
-                ArithmeticGame(10,2,20);
+                ArithmeticGame(10, 2, 20);
+            else if (args[0] == "timer")
+                Timer();
+
             //else if (args[0] == "rc")
             //    ReadingComprehension();
             //WorkingMemory(int.Parse(args[1]), int.Parse(args[2]), bool.Parse(args[3]));
@@ -31,6 +35,24 @@ namespace HelloWorld
             //    PhoneticSystem();
 
         }
+
+        private static void Timer()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Enter what you are timing:");
+
+            string todo = Console.ReadLine();
+            Stopwatch time10kOperations = Stopwatch.StartNew();
+            Console.WriteLine();
+            Console.WriteLine("Press any key to stop");
+            Console.ReadLine();
+            time10kOperations.Stop();
+            Console.WriteLine("Elapsed time: " + time10kOperations.Elapsed);
+            File.WriteAllText("timer", todo + ";" + time10kOperations.Elapsed.Seconds.ToString());
+            Console.ReadLine();
+
+        }
+
         //contains a list of 00-99 user created celebrity names for use in a mneumonic system
         private static void CelebrityMneumonicSystem()
         {
@@ -300,7 +322,7 @@ namespace HelloWorld
                             else
                                 Console.WriteLine("Wrong, value is " + ra);
             var dat = DateTime.Today.ToShortDateString();
-            File.AppendAllText("arithmeticStats", string.Format("{0};digits:{1};score:{2}/{3};{4}",opType, digits,points,totalQns,dat));
+            File.AppendAllText("arithmeticStats", string.Format("\n{0};digits:{1};score:{2}/{3};{4}",opType, digits,points,totalQns,dat));
                         }
                         Console.WriteLine("Another round?");
                         var foo = Console.ReadLine();
