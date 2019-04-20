@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FlashcardProgram
 {
-    public static class StringArray
+    public static class RandomNumberGenerator
     {
         private static readonly Random random = new Random();
         private static readonly object syncLock = new object();

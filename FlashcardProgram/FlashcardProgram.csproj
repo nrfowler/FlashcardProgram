@@ -57,7 +57,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="StringArray.cs" />
+    <Compile Include="RandomNumberGenerator.cs" />
+    <Compile Include="WorkingMemoryGame.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
