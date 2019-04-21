@@ -57,7 +57,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="RandomNumberGenerator.cs" />
+    <Compile Include="RandUtil.cs" />
     <Compile Include="WorkingMemoryGame.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,7 +70,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="data.txt" />
+    <Content Include="data.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

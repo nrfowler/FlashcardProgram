@@ -4,7 +4,7 @@ using System.Text;
 using System.Collections;
 using System.Text.RegularExpressions;
 using FlashcardProgram.Properties;
-using static FlashcardProgram.RandomNumberGenerator;
+using static FlashcardProgram.RandUtil;
 using System.Diagnostics;
 using FlashcardProgram;
 

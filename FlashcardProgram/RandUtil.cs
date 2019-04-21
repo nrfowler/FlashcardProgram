@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +7,27 @@ using System.Threading.Tasks;
 
 namespace FlashcardProgram
 {
-    public static class RandomNumberGenerator
+    public static class RandUtil
     {
         private static readonly Random random = new Random();
         private static readonly object syncLock = new object();
+        public static object[] intList = new object[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
+        public static ArrayList Randomize(this ArrayList al)
+        {
+            int count = al.Count;
+            //10^length-1=greatest possible count
+            //length = log10(count+1)
+            for (int i =0;i<count/2;i++)
+            {
+                int r=intList.RandInt((int)Math.Log10(count+1),0);
+                var foo = al[i];
+
+                al[i] = al[r];
+                al[r] = foo;
+            }
+            return al;
+        }
         public static string Rand(this object[] ob)
         {
             lock (syncLock)
