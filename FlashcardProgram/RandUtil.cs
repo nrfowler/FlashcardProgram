@@ -37,6 +37,15 @@ namespace FlashcardProgram
         }
         //length: number of digits
         //minVal: minimum value, inclusive
+        public static double Rnd(this double f)
+        {
+            double res;
+            lock (syncLock)
+            { // synchronize
+                res=random.NextDouble();
+            }
+            return res;
+        }
         public static int RandInt(this object[] ob, int length, int minVal)
         {
             var finalInt = 0;

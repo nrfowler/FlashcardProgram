@@ -291,7 +291,9 @@ namespace HelloWorld
                 return "+";
             else if (op == "s")
                 return "-";
-            return "";
+            else if (op == "p")
+                return "%";
+                return "";
 
 
         }
@@ -301,41 +303,49 @@ namespace HelloWorld
             
             while (quit == false)
             {
-                Console.WriteLine("Decimals (y/n)?");
-                bool useDecimal = Console.ReadLine() == "y" ? true: false ;
-                Console.WriteLine("Mulitply, Divide, Add,\nSubtract, Squares, Modulus\n(m/d/a/s/2/x)");
+                //Console.WriteLine("1 Decimal, 2 Decimal, or Integers?");
+                //string useDecimal = Console.ReadLine();
+                Console.WriteLine("Mulitply, Divide, Add,\nSubtract, Squares, Modulus, Percentage\n(m/d/a/s/2/x/p)");
                 opType = Console.ReadLine();
                             Stopwatch time10kOperations = Stopwatch.StartNew();
-                if (!useDecimal)
-                {
+                
                     var cont = true;
                     while (cont)
                     {
                         for (int i = 0; i < totalQns; i++)
                         {
                             var firstRandom = intList.RandInt(digits, minVal);
+                            double pct=0;
                             int secondRandom = 0;
                             if (opType == "2")
                                 secondRandom = firstRandom;
+                            else if (opType == "p")
+                                pct = ((int)(new double().Rnd() * 100)) / 100.00;
                             else
-                                secondRandom = intList.RandInt(digits,minVal);
+                                secondRandom = intList.RandInt(digits, minVal);
 
                             if (opType == "2")
                                 Console.WriteLine("{0}^2 = ", firstRandom);
+                            else if (opType == "p")
+                                Console.WriteLine("{0}% of {1} = ", pct*100, firstRandom);
                             else
                                 Console.WriteLine("{0} " + OpType(opType) + "{1} = ", firstRandom, secondRandom);
                             var ans = Console.ReadLine();
-                            int ra = 0;
-                            if (opType == "m" || opType=="2")
+                            double ra = 0;
+                            if (opType == "m" || opType == "2")
                                 ra = firstRandom * secondRandom;
+                            else if (opType == "p")
+                                ra = firstRandom * pct;
                             else if (opType == "d")
                                 ra = firstRandom / secondRandom;
                             else if (opType == "a")
                                 ra = firstRandom + secondRandom;
                             else if (opType == "s")
                                 ra = firstRandom - secondRandom;
-
-                            if (ra == int.Parse(ans))
+                            double result;
+                            if (!double.TryParse(ans,out result))
+                                result = 0;
+                            if (ra == result)
                             {
                                 Console.WriteLine("Correct!");
                                 points++;
@@ -359,11 +369,8 @@ namespace HelloWorld
                         }
                     }
 
-                }
-                else
-                {
-                    quit = true;
-                }
+                
+                
                 Console.WriteLine("Quit (y/n)?");
                 quit = Console.ReadLine() == "y" ? true : false;
             }
