@@ -31,6 +31,8 @@ namespace HelloWorld
                 ArithmeticGame(10, 2, 20);
             else if (args[0] == "timer")
                 Timer();
+            else if (args[0] == "test")
+                TestP();
             else
             {
                 PhoneticDictionary();
@@ -47,6 +49,17 @@ namespace HelloWorld
             //else if (args[0] == "mn")
             //    PhoneticSystem();
 
+        }
+
+        private static void TestP()
+        {
+            var a = "angelinna Jolie";
+            var b = "Angelina Jolie";
+            Console.WriteLine(a.isSimilar(b));
+            a = "";
+                            Console.WriteLine(a.isSimilar(b));
+
+            Console.Read();
         }
 
         private static void Timer()
@@ -92,7 +105,7 @@ namespace HelloWorld
                         var response = Console.ReadLine();
 
                         string value = item.Split(new char[] { ';' })[1];
-                        if (response == value)
+                        if (response.isSimilar(value))
                         {
                             Console.WriteLine("Correct!");
 
@@ -220,7 +233,7 @@ namespace HelloWorld
                         do
                         {
                             var numarray = new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-                            var digits = new string[] { "2", "3", "4", "7" }.Rand();
+                            var digits = new string[] { "2", "3"}.Rand();
                             randomnum = numarray.Rand() + numarray.Rand();
                             switch (digits)
                             {
@@ -332,6 +345,8 @@ namespace HelloWorld
                                 Console.WriteLine("{0} " + OpType(opType) + "{1} = ", firstRandom, secondRandom);
                             var ans = Console.ReadLine();
                             double ra = 0;
+                       
+
                             if (opType == "m" || opType == "2")
                                 ra = firstRandom * secondRandom;
                             else if (opType == "p")

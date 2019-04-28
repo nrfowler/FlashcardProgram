@@ -13,6 +13,39 @@ namespace FlashcardProgram
         private static readonly object syncLock = new object();
         public static object[] intList = new object[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
+        public static ArrayList removeRepeats(this char[] a)
+        {
+            var foo = new ArrayList(a);
+            var bar = new ArrayList();
+            if (a.Length == 0)
+                return new ArrayList();
+
+            bar.Add(foo[0]);
+
+            for(int i = 1; i < foo.Count; i++)
+            {
+                if(!foo[i].Equals(foo[i-1]))
+                {
+                    bar.Add(foo[i]);
+
+                }
+            }
+            return bar;
+        }
+        public static Boolean isSimilar(this string a, string b)
+        {
+            var c = a.ToLower().Replace(" ", "").ToCharArray().removeRepeats();
+            var d = b.ToLower().Replace(" ", "").ToCharArray().removeRepeats();
+            if((c.Count==0) || (d.Count ==0))
+                return false;
+            for (int i = 0; i < c.Count; i++)
+            {
+                if (!c[i].Equals(d[i]))
+                    return false;
+            }
+                return true;
+
+                    }
         public static ArrayList Randomize(this ArrayList al)
         {
             int count = al.Count;
