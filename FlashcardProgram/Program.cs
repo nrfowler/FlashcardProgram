@@ -35,6 +35,8 @@ namespace HelloWorld
                 TestP();
             else
             {
+                int foo = intList.RandInt(3, 0);
+                SpeedReading.SpacedReading("C:\\Users\\Nathan\\OneDrive\\porn\\Dropbox\\journal\\rlzn.txt", foo, foo + 10);
                 MneumonicSystem.Phonetic();
                 WorkingMemoryGame.Play(10, 2, true);//keep constant at this value for accurate stats
                 MneumonicSystem.Celebrity();
@@ -48,11 +50,8 @@ namespace HelloWorld
 
         private static void TestP()
         {
-            var a = "angelinna Jolie";
-            var b = "Angelina Jolie";
-            Console.WriteLine(a.isSimilar(b));
-            a = "";
-                            Console.WriteLine(a.isSimilar(b));
+            //SpeedReading.SpacedReading("C:\\Users\\Nathan\\OneDrive\\prince.txt",0,20);
+            
 
             Console.Read();
         }
