@@ -48,8 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Arithmetic.cs" />
     <Compile Include="Deck.cs" />
     <Compile Include="Flashcard.cs" />
+    <Compile Include="MneumonicSystem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
