@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace FlashcardProgram
@@ -12,7 +14,38 @@ namespace FlashcardProgram
         private static readonly Random random = new Random();
         private static readonly object syncLock = new object();
         public static object[] intList = new object[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        public static string GetField(this string a, int i)
+        {
+            MatchCollection matches = Regex.Matches(a, @";[\w']*;");
 
+            var words = from m in matches.Cast<Match>()
+                        where !string.IsNullOrEmpty(m.Value)
+                        select m.Value;
+
+            return words.ToList()[i];
+        }
+    
+        public static void DuplicateDevour(this string file)
+        {
+            var lines = File.ReadAllLines(file);
+            Dictionary<string, int> map = new Dictionary<string, int>();
+            foreach(string line in lines)
+            {
+                var num = line.GetField(0);
+                if (map[num] == 1)
+                    continue;
+                else
+                {
+                   
+                    map[line.GetField(0)] = 1;
+                }
+            }
+            foreach(KeyValuePair<string,int> in map)
+            {
+                    File.WriteLine(line);
+
+            }
+        }
         public static ArrayList removeRepeats(this char[] a)
         {
             var foo = new ArrayList(a);

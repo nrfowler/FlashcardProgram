@@ -16,6 +16,19 @@ namespace HelloWorld
 
         static void Main(string[] args)
         {
+            if(args.Length==0)
+            {
+                
+                    int foo = intList.RandInt(3, 0);
+                    SpeedReading.SpacedReading("C:\\Users\\Nathan\\OneDrive\\porn\\Dropbox\\journal\\rlzn.txt", foo, foo + 10);
+                    MneumonicSystem.Phonetic();
+                    WorkingMemoryGame.Play(10, 2, true);//keep constant at this value for accurate stats
+                    MneumonicSystem.Celebrity();
+                    Arithmetic.Game(10, 2, 20);
+                    Console.WriteLine("Do an exercise offline");
+                    Timer();
+                
+            }
             if (args[0] == "fc")
                 FlashCard.FlashCards();
             else if (args[0] == "ph")
@@ -33,17 +46,8 @@ namespace HelloWorld
                 Timer();
             else if (args[0] == "test")
                 TestP();
-            else
-            {
-                int foo = intList.RandInt(3, 0);
-                SpeedReading.SpacedReading("C:\\Users\\Nathan\\OneDrive\\porn\\Dropbox\\journal\\rlzn.txt", foo, foo + 10);
-                MneumonicSystem.Phonetic();
-                WorkingMemoryGame.Play(10, 2, true);//keep constant at this value for accurate stats
-                MneumonicSystem.Celebrity();
-                Arithmetic.Game(10, 2, 20);
-                Console.WriteLine("Do an exercise offline");
-                Timer();
-            }
+            
+            
 
 
         }

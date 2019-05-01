@@ -11,6 +11,10 @@ namespace FlashcardProgram
 {
     class SpeedReading
     {
+        public List<string> RemoveVowels(List<string> words)
+        {
+            return new List<string>();
+        }
 
         public static void SpacedReading(string file,int start, int end)
         {
@@ -47,13 +51,22 @@ namespace FlashcardProgram
 
         static List<String> GetWords(string input)
         {
-            MatchCollection matches = Regex.Matches(input, @"\b[\w']*\b");
+            {
+                MatchCollection matches = Regex.Matches(input, @"\b[\w']*\b");
 
-            var words = from m in matches.Cast<Match>()
-                        where !string.IsNullOrEmpty(m.Value)
-                        select m.Value;
 
-            return words.ToList();
+
+                var words = from m in matches.Cast<Match>()
+
+                            where !string.IsNullOrEmpty(m.Value)
+
+                            select m.Value;
+
+
+
+                return words.ToList();
+
+            }
         }
 
         static string TrimSuffix(string word)
