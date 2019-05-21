@@ -10,6 +10,7 @@ using FlashcardProgram;
 
 namespace HelloWorld
 {
+    public delegate void LoopDelegate();
     class Program
     {
         public static object[] intList = new object[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -20,7 +21,7 @@ namespace HelloWorld
             {
                 
                     int foo = intList.RandInt(3, 0);
-                    SpeedReading.SpacedReading("C:\\Users\\Nathan\\OneDrive\\porn\\Dropbox\\journal\\rlzn.txt", foo, foo + 10);
+                    SpeedReading.SpacedReading("C:\\Users\\Nathan\\OneDrive\\porn\\Dropbox\\journal\\rlzn.txt", foo, foo +5);
                     MneumonicSystem.Phonetic();
                     WorkingMemoryGame.Play(10, 2, true);//keep constant at this value for accurate stats
                     MneumonicSystem.Celebrity();
@@ -29,11 +30,18 @@ namespace HelloWorld
                     Timer();
                 
             }
-            if (args[0] == "fc")
+            else if (args[0] == "fc")
                 FlashCard.FlashCards();
             else if (args[0] == "ph")
             {
                 MneumonicSystem.Phonetic();
+
+            }
+            else if (args[0] == "read")
+            {
+                LoopDelegate ld = new LoopDelegate(OneRandRead);
+
+                InfRounds(ld);
 
             }
             else if (args[0] == "wm")
@@ -50,6 +58,27 @@ namespace HelloWorld
             
 
 
+        }
+       
+
+        public static void InfRounds(LoopDelegate ld) { 
+            do{
+        ld();
+                Console.WriteLine("Continue?");
+                var foo = Console.ReadLine();
+
+                if (foo == "n"||foo=="N")
+                    break;
+                Console.Clear();
+        }while(true);
+
+        }
+
+
+        private static void OneRandRead()
+        {
+            int foo = intList.RandInt(3, 0);
+            SpeedReading.RandRead("C:\\Users\\Nathan\\OneDrive\\data\\Dropbox\\journal\\rlzn.txt", foo, foo + 5);
         }
 
         private static void TestP()

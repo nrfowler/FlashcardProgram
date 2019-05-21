@@ -48,11 +48,35 @@ namespace FlashcardProgram
 
             }
         }
+        public static void RandRead(string file, int start, int end)
+        {
+            var f = File.ReadAllLines(file);
+            var words = new List<string>();
+            int i;
+            for (i = start; i < end; i++)
+                words.AddRange(GetWords(f[i]));
 
+
+            //td: go to end of the line (end)
+            i = 0;
+            foreach (string word in words)
+            {
+                i+=word.Length;
+                if (i > 50)
+                {
+                    i =0;
+                    Console.WriteLine("");
+                }
+                
+                    Console.Write( word+" ");
+                
+
+            }
+        }
         static List<String> GetWords(string input)
         {
             {
-                MatchCollection matches = Regex.Matches(input, @"\b[\w']*\b");
+                MatchCollection matches = Regex.Matches(input, @"\b[\w|\.]*\b");
 
 
 

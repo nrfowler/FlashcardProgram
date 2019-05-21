@@ -10,6 +10,25 @@ namespace FlashcardProgram
 {
     class Arithmetic
     {
+
+        public static void WordProblemGame()
+        {
+
+        }
+        //5/3/19: LimitSolver
+        //static float LimitSolver(float[] numerator, float[] denominator)
+        //{
+        //    if (numerator.Contains<int>(0))
+        //        throw Exception("Wrong input");
+        //    if (denominator.Contains<int>(0))
+        //        throw Exception("Wrong input");
+        //    if (numerator.Length > denominator.Length)
+        //        return float.MaxValue;
+        //    else if (numerator.Length <  denominator.Length)
+        //        return 0;
+
+        //    return 0;
+        //}
         //Arithmetic game
         //totalQns: questions asked per round
         //digits: digits of both operands
