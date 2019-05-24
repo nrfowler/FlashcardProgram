@@ -11,6 +11,8 @@ using FlashcardProgram;
 namespace HelloWorld
 {
     public delegate void LoopDelegate();
+    public delegate int ArithmeticLoop(int x, int y, int z, int  i, string s, Stopwatch w);
+
     class Program
     {
         public static object[] intList = new object[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -21,7 +23,7 @@ namespace HelloWorld
             {
                 
                     int foo = intList.RandInt(3, 0);
-                    SpeedReading.SpacedReading("C:\\Users\\Nathan\\OneDrive\\porn\\Dropbox\\journal\\rlzn.txt", foo, foo +5);
+                    SpeedReading.SpacedReading("C:\\Users\\Nathan\\OneDrive\\data\\Dropbox\\journal\\rlzn.txt", foo, foo +5);
                     MneumonicSystem.Phonetic();
                     WorkingMemoryGame.Play(10, 2, true);//keep constant at this value for accurate stats
                     MneumonicSystem.Celebrity();
@@ -74,7 +76,7 @@ namespace HelloWorld
 
         }
 
-
+        
         private static void OneRandRead()
         {
             int foo = intList.RandInt(3, 0);
