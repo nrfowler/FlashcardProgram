@@ -62,6 +62,7 @@ namespace FlashcardProgram
                 Console.WriteLine("Mulitply, Divide, Add,\nSubtract, Squares, Modulus, Percentage\n(m/d/a/s/2/x/p)");
                 opType = Console.ReadLine();
                 Stopwatch time10kOperations = Stopwatch.StartNew();
+                time10kOperations.Start();
                  ScoredRounds(al,points,totalQns, digits, minVal, points, opType, time10kOperations);
                     
 
@@ -129,16 +130,18 @@ namespace FlashcardProgram
                 double result;
                 if (!double.TryParse(ans, out result))
                     result = 0;
-                if (ra == result)
+                 //remove repeating digits problem
+                if (ra +.01 >= result && ra -.1 <= result)
                 {
                     Console.WriteLine("Correct!");
                     points++;
                 }
                 else
-                    Console.WriteLine("Wrong, value is " + ra);
+                    Console.WriteLine("Wrong, value is " + ra+ " but you entered "+result);
             }
             time10kOperations.Stop();
             var dat = DateTime.Today.ToShortDateString();
+            Console.WriteLine("Time Elapsed was " +time10kOperations.Elapsed.Seconds.ToString()+" seconds \nScore was "+points+"/"+totalQns);
             File.AppendAllText("arithmeticStats", string.Format("\n{0};digits:{1};score:{2}/{3};{4};seconds:{5}", opType,
                 digits, points, totalQns, dat, time10kOperations.Elapsed.Seconds.ToString()));
             return points;
