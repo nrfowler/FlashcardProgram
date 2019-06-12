@@ -213,5 +213,10 @@ namespace FlashcardProgram
             //import phonetic.txt
             //random number and then append to text file
         }
+        //creates a list of 100 actions for use in a "celebrity mneumonic system"-Oprah Skiing, etc.
+        public static void CelebAction()
+        {
+
+        }
     }
 }

@@ -62,9 +62,8 @@ namespace FlashcardProgram
                 Console.WriteLine("Mulitply, Divide, Add,\nSubtract, Squares, Modulus, Percentage\n(m/d/a/s/2/x/p)");
                 opType = Console.ReadLine();
                 Stopwatch time10kOperations = Stopwatch.StartNew();
-                time10kOperations.Start();
                  ScoredRounds(al,points,totalQns, digits, minVal, points, opType, time10kOperations);
-                    
+                time10kOperations.Reset();
 
 
 

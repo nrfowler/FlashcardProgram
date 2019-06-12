@@ -26,7 +26,7 @@ namespace HelloWorld
                     SpeedReading.SpacedReading("C:\\Users\\Nathan\\OneDrive\\data\\Dropbox\\journal\\rlzn.txt", foo, foo +5);
                     MneumonicSystem.Phonetic();
                     WorkingMemoryGame.Play(10, 2, true);//keep constant at this value for accurate stats
-                    MneumonicSystem.Celebrity();
+                    //MneumonicSystem.Celebrity();
                     Arithmetic.Game(10, 2, 20);
                     Console.WriteLine("Do an exercise offline");
                     Timer();
