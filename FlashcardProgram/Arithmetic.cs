@@ -59,7 +59,7 @@ namespace FlashcardProgram
             {
                 //Console.WriteLine("1 Decimal, 2 Decimal, or Integers?");
                 //string useDecimal = Console.ReadLine();
-                Console.WriteLine("Mulitply, Divide, Add,\nSubtract, Squares, Modulus, Percentage\n(m/d/a/s/2/x/p)");
+                Console.WriteLine("Mulitply, Divide, Add,\nSubtract, Squares, Modulus,\nFactor, Percentage\n(m/d/a/s/2/x/f/p)");
                 opType = Console.ReadLine();
                 Stopwatch time10kOperations = Stopwatch.StartNew();
                  ScoredRounds(al,points,totalQns, digits, minVal, points, opType, time10kOperations);
@@ -110,10 +110,13 @@ namespace FlashcardProgram
                     Console.WriteLine("{0}^2 = ", firstRandom);
                 else if (opType == "p")
                     Console.WriteLine("{0}% of {1} = ", pct * 100, firstRandom);
+                else if (opType == "f")
+                    Console.WriteLine("Factor {0} ", firstRandom);
                 else
                     Console.WriteLine("{0} " + OpType(opType) + "{1} = ", firstRandom, secondRandom);
                 var ans = Console.ReadLine();
                 double ra = 0;
+                double result=0;
 
 
                 if (opType == "m" || opType == "2")
@@ -126,8 +129,18 @@ namespace FlashcardProgram
                     ra = firstRandom + secondRandom;
                 else if (opType == "s")
                     ra = firstRandom - secondRandom;
-                double result;
-                if (!double.TryParse(ans, out result))
+                else if (opType == "f")
+                {
+                    ra = firstRandom;
+                    int[] numbers = Array.ConvertAll(ans.Split(' '), int.Parse);
+                    int product = 1;
+                    foreach (int number in numbers)
+                    {
+                        product *= number;
+                    }
+                    result = product;
+                }
+                if (opType != "f" && !double.TryParse(ans, out result))
                     result = 0;
                  //remove repeating digits problem
                 if (ra +.01 >= result && ra -.1 <= result)
