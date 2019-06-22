@@ -122,25 +122,25 @@ namespace FlashcardProgram
                     finalInt += (int)ob[(random.Next()) % (ob.Length)];
                 }
                 if (length == 1)
-                    return finalInt;
+                    continue;
                 lock (syncLock)
                 { // synchronize
                     finalInt += 10 * (int)ob[(random.Next()) % (ob.Length)];
                 }
                 if (length == 2)
-                    return finalInt;
+                    continue;
                 lock (syncLock)
                 { // synchronize
                     finalInt += 100 * (int)ob[(random.Next()) % (ob.Length)];
                 }
                 if (length == 3)
-                    return finalInt;
+                    continue;
                 lock (syncLock)
                 { // synchronize
                     finalInt += 1000 * (int)ob[(random.Next()) % (ob.Length)];
                 }
                 if (length == 4)
-                    return finalInt;
+                    continue;
 
             } while (finalInt < minVal);
             return finalInt;
