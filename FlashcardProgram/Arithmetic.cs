@@ -46,12 +46,12 @@ namespace FlashcardProgram
         //Arithmetic game
         //totalQns: questions asked per round
         //digits: digits of both operands
-        public static void Game(int totalQns, int digits, int minVal, int maxVal)
+        public static void Game(int totalQns, int maxDigits, int minVal, int maxVal)
         {
 
             
             var quit = false;
-            var points = 0;
+            var score = 0;
             string opType = "";
 
             ArithmeticLoop al = new ArithmeticLoop(PlayRound);
@@ -63,13 +63,13 @@ namespace FlashcardProgram
                     "Subtract, Squares(2), Modulus\nFactor, Percentage\nLog, Power(pow)");
                 opType = Console.ReadLine();
                 Stopwatch time10kOperations = Stopwatch.StartNew();
-                 ScoredRounds(al,points,totalQns, digits, minVal, maxVal, points, opType, time10kOperations);
+                 ScoredRounds(al,totalQns, maxDigits, minVal, maxVal,opType, time10kOperations);
                 time10kOperations.Reset();
 
 
 
-                Console.WriteLine("Quit (y/n)?");
-                quit = Console.ReadLine() == "y" ? true : false;
+                Console.WriteLine("Continue (y/n)?");
+                quit = Console.ReadLine() == "y" ? false : true;
             }
 
 
@@ -77,11 +77,11 @@ namespace FlashcardProgram
             //random number and then append to text file
         }
 
-        public static int ScoredRounds(ArithmeticLoop ld, int score, int x, int y, int maxVal, int z, int i, string s, Stopwatch w)
+        public static void ScoredRounds(ArithmeticLoop ld, int totalQns, int maxDigits, int minVal, int maxVal,string opType, Stopwatch w)
         {
             do
             {
-                score += ld(x, y, maxVal, z, i, s, w);
+                ld(totalQns, maxDigits, minVal, maxVal, opType, w);
                 Console.WriteLine("Continue?");
                 var foo = Console.ReadLine();
 
@@ -89,12 +89,13 @@ namespace FlashcardProgram
                     break;
                 Console.Clear();
             } while (true);
-            return score;
+            
         }
 
         //FEATURE REQUEST: MAX VALUE
-        private static int PlayRound(int totalQns, int digits, int minVal, int maxVal, int points, string opType, Stopwatch time10kOperations)
+        private static int PlayRound(int totalQns, int maxDigits, int minVal, int maxVal, string opType, Stopwatch time10kOperations)
         {
+            int points = 0;
             for (int i = 0; i < totalQns; i++)
             {
                 if(opType=="f")
@@ -113,7 +114,7 @@ namespace FlashcardProgram
                     sum = 0;
                     for(int it=0;it<5; it++)
                     {
-                        operands[it]= opType=="sa"? intList.RandInt(digits, minVal): intList.RandInt(1, 1);
+                        operands[it]= opType=="sa"? intList.RandInt(maxDigits, minVal): intList.RandInt(1, 1);
                         string OS = it==0? " " : OpType(opType);
                         Console.WriteLine("{0}{1,2}",OS, operands[it]);
                         product *= operands[it];
@@ -128,7 +129,7 @@ namespace FlashcardProgram
                 else
                 {
                     
-                     firstRandom = intList.RandInt(digits, minVal,maxVal);
+                     firstRandom = intList.RandInt(maxDigits, minVal,maxVal);
                      pct = 0;
                      secondRandom = 0;
                     if (opType == "2")
@@ -142,7 +143,7 @@ namespace FlashcardProgram
 
                     }
                     else
-                        secondRandom = intList.RandInt(digits, minVal,maxVal);
+                        secondRandom = intList.RandInt(maxDigits, minVal,firstRandom-1);//ensure subtraction yields no negatives
 
                     if (opType == "2")
                         Console.WriteLine("{0}^2 = ", firstRandom);
@@ -210,7 +211,7 @@ namespace FlashcardProgram
             var dat = DateTime.Today.ToShortDateString();
             Console.WriteLine("Time Elapsed was " +time10kOperations.Elapsed.Seconds.ToString()+" seconds \nScore was "+points+"/"+totalQns);
             File.AppendAllText("arithmeticStats", string.Format("\n{0};digits:{1};score:{2}/{3};{4};seconds:{5};minmax:{6}-{7}", opType,
-                digits, points, totalQns, dat, time10kOperations.Elapsed.Seconds.ToString(),minVal, maxVal));
+                maxDigits, points, totalQns, dat, time10kOperations.Elapsed.Seconds.ToString(),minVal, maxVal));
             return points;
         }
     }

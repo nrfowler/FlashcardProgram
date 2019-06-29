@@ -11,7 +11,7 @@ using FlashcardProgram;
 namespace HelloWorld
 {
     public delegate void LoopDelegate();
-    public delegate int ArithmeticLoop(int x, int y, int maxVal, int z, int  i, string s, Stopwatch w);
+    public delegate int ArithmeticLoop(int totalQns,int maxDigits, int minVal, int maxVal, string opType, Stopwatch w);
 
     class Program
     {
@@ -51,7 +51,7 @@ namespace HelloWorld
             else if (args[0] == "celeb")
                 MneumonicSystem.Celebrity();
             else if (args[0] == "ag")
-                Arithmetic.Game(10, 2, 11,20);
+                Arithmetic.Game(10, 2, 4,20);
             else if (args[0] == "timer")
                 Timer();
             else if (args[0] == "test")

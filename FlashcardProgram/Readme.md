@@ -10,6 +10,7 @@ How to Calculate Quickly, Henry Sticker
 
 ### TODO ###
 * Bugs:
+	* Freezes duringn subtraction
 	*fix not recognizing duplicate issue in celeb
 		*remove the duplicates from files that were modified during this error
 	*string comparer that is capitalization, nonalphanum symbol, and letter duplication agnostic

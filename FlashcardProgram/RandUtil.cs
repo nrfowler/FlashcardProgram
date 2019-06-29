@@ -112,7 +112,7 @@ namespace FlashcardProgram
             }
             return res;
         }
-        public static int RandInt(this object[] ob, int length, int minVal, int max = 0)
+        public static int RandInt(this object[] ob, int maxDigits, int minVal, int max = 0)
         {
             var finalInt = 0;
             if (max == 0)
@@ -123,25 +123,25 @@ namespace FlashcardProgram
                     { // synchronize
                         finalInt = (int)ob[(random.Next()) % (ob.Length)];
                     }
-                    if (length == 1)
+                    if (maxDigits == 1)
                         continue;
                     lock (syncLock)
                     { // synchronize
                         finalInt += 10 * (int)ob[(random.Next()) % (ob.Length)];
                     }
-                    if (length == 2)
+                    if (maxDigits == 2)
                         continue;
                     lock (syncLock)
                     { // synchronize
                         finalInt += 100 * (int)ob[(random.Next()) % (ob.Length)];
                     }
-                    if (length == 3)
+                    if (maxDigits == 3)
                         continue;
                     lock (syncLock)
                     { // synchronize
                         finalInt += 1000 * (int)ob[(random.Next()) % (ob.Length)];
                     }
-                    if (length == 4)
+                    if (maxDigits == 4)
                         continue;
 
                 } while (finalInt < minVal);
@@ -155,28 +155,28 @@ namespace FlashcardProgram
                 { // synchronize
                     finalInt = (int)ob[(random.Next()) % (ob.Length)];
                 }
-                if (length == 1)
+                if (maxDigits == 1)
                     continue;
                 lock (syncLock)
                 { // synchronize
                     finalInt += 10 * (int)ob[(random.Next()) % (ob.Length)];
                 }
-                if (length == 2)
+                if (maxDigits == 2)
                     continue;
                 lock (syncLock)
                 { // synchronize
                     finalInt += 100 * (int)ob[(random.Next()) % (ob.Length)];
                 }
-                if (length == 3)
+                if (maxDigits == 3)
                     continue;
                 lock (syncLock)
                 { // synchronize
                     finalInt += 1000 * (int)ob[(random.Next()) % (ob.Length)];
                 }
-                if (length == 4)
+                if (maxDigits == 4)
                     continue;
 
-            } while (finalInt < minVal || finalInt>=max);
+            } while (finalInt < minVal || finalInt>max);
             return finalInt;
 
 
