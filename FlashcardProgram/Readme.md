@@ -4,8 +4,9 @@ This app is a collection of mental training games that use advanced memory techn
 
 ### Commands ###
 * ag: Arithmetic Game
-* celeb: Celebrity Mneumonic game
 * [no command]: Play all games
+### REFERENCES ###
+How to Calculate Quickly, Henry Sticker
 
 ### TODO ###
 * Bugs:
@@ -16,10 +17,10 @@ This app is a collection of mental training games that use advanced memory techn
 	*way to back up pd.text, etc.
 * Planned Features:
 	*find out how to make a reading comprehension quiz
-	*Celebrity game will consist of: Name, Action, Location (Oprah Kicks ball at a Ski Lodge)
+	* PTCE game
+	* Real Estate game: home appraisal
 	*stock ticker quiz
 	*actions and locations quiz
 	*generic multiple choice question and answer database that constantly appends
 	*a database or csv file of simple math questions used on IQ tests
 	*Thesaurus game (uses thesaurus)
-	*a generic loop framework for games

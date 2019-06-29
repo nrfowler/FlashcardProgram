@@ -46,7 +46,7 @@ namespace FlashcardProgram
         //Arithmetic game
         //totalQns: questions asked per round
         //digits: digits of both operands
-        public static void Game(int totalQns, int digits, int minVal)
+        public static void Game(int totalQns, int digits, int minVal, int maxVal)
         {
 
             
@@ -59,10 +59,11 @@ namespace FlashcardProgram
             {
                 //Console.WriteLine("1 Decimal, 2 Decimal, or Integers?");
                 //string useDecimal = Console.ReadLine();
-                Console.WriteLine("Mulitply, Divide, Add\nSerial Add'n, Serial Multiplication\nSubtract, Squares, Modulus\nFactor, Percentage\n(m/d/a/s/2/x/f/p)");
+                Console.WriteLine("Mulitply, Divide, Add\nSerial Add'n, Serial Multiplication\n" +
+                    "Subtract, Squares(2), Modulus\nFactor, Percentage\nLog, Power(pow)");
                 opType = Console.ReadLine();
                 Stopwatch time10kOperations = Stopwatch.StartNew();
-                 ScoredRounds(al,points,totalQns, digits, minVal, points, opType, time10kOperations);
+                 ScoredRounds(al,points,totalQns, digits, minVal, maxVal, points, opType, time10kOperations);
                 time10kOperations.Reset();
 
 
@@ -76,11 +77,11 @@ namespace FlashcardProgram
             //random number and then append to text file
         }
 
-        public static int ScoredRounds(ArithmeticLoop ld, int score, int x, int y, int z, int i, string s, Stopwatch w)
+        public static int ScoredRounds(ArithmeticLoop ld, int score, int x, int y, int maxVal, int z, int i, string s, Stopwatch w)
         {
             do
             {
-                score += ld(x, y, z, i, s, w);
+                score += ld(x, y, maxVal, z, i, s, w);
                 Console.WriteLine("Continue?");
                 var foo = Console.ReadLine();
 
@@ -92,7 +93,7 @@ namespace FlashcardProgram
         }
 
         //FEATURE REQUEST: MAX VALUE
-        private static int PlayRound(int totalQns, int digits, int minVal, int points, string opType, Stopwatch time10kOperations)
+        private static int PlayRound(int totalQns, int digits, int minVal, int maxVal, int points, string opType, Stopwatch time10kOperations)
         {
             for (int i = 0; i < totalQns; i++)
             {
@@ -102,6 +103,8 @@ namespace FlashcardProgram
                 double pct = 0;
                 int product, sum;
                 double ra = 0;
+                int _base = 1;
+                int power = 0;
                 double result=0;
                 if (opType == "sa" || opType == "sm")
                 {
@@ -111,11 +114,12 @@ namespace FlashcardProgram
                     for(int it=0;it<5; it++)
                     {
                         operands[it]= opType=="sa"? intList.RandInt(digits, minVal): intList.RandInt(1, 1);
-                        Console.WriteLine("{0,2}",operands[it]);
+                        string OS = it==0? " " : OpType(opType);
+                        Console.WriteLine("{0}{1,2}",OS, operands[it]);
                         product *= operands[it];
                         sum += operands[it];
                     }
-                    Console.WriteLine("-----");
+                    Console.WriteLine("---");
                     if (opType == "sa")
                         ra = sum;
                     else
@@ -123,28 +127,38 @@ namespace FlashcardProgram
                 }
                 else
                 {
-
-                     firstRandom = intList.RandInt(digits, minVal);
+                    
+                     firstRandom = intList.RandInt(digits, minVal,maxVal);
                      pct = 0;
                      secondRandom = 0;
                     if (opType == "2")
                         secondRandom = firstRandom;
                     else if (opType == "p")
                         pct = ((int)(new double().Rnd() * 100)) / 100.00;
+                    else if (opType == "pow")
+                    {
+                         _base= intList.RandInt(1, 1,5);
+                         power = intList.RandInt(1, 3,5);
+
+                    }
                     else
-                        secondRandom = intList.RandInt(digits, minVal);
+                        secondRandom = intList.RandInt(digits, minVal,maxVal);
 
                     if (opType == "2")
                         Console.WriteLine("{0}^2 = ", firstRandom);
                     else if (opType == "p")
                         Console.WriteLine("{0}% of {1} = ", pct * 100, firstRandom);
+                    else if (opType == "pow")
+                        Console.WriteLine("{0}^{1} = ", _base,power);
                     else if (opType == "f")
                         Console.WriteLine("Factor {0} ", firstRandom);
+                    else if (opType == "log")
+                        Console.WriteLine("Log {0} Base {1}", firstRandom);
                     else
                         Console.WriteLine("{0} " + OpType(opType) + " {1} = ", firstRandom, secondRandom);
                 }
                 var ans = Console.ReadLine();
-
+                
 
                 if (opType == "m" || opType == "2")
                     ra = firstRandom * secondRandom;
@@ -156,6 +170,10 @@ namespace FlashcardProgram
                     ra = firstRandom + secondRandom;
                 else if (opType == "s")
                     ra = firstRandom - secondRandom;
+                else if (opType == "pow")
+                    ra = Math.Pow(_base,power);
+                else if (opType == "log")
+                    ra = Math.Log(firstRandom);
                 else if (opType == "f")
                 {
                     ra = firstRandom;
@@ -163,6 +181,14 @@ namespace FlashcardProgram
                      product = 1;
                     foreach (int number in numbers)
                     {
+                        for (int a = 2; a <= number / 2; a++)
+                                                                        {
+                            if (number % a == 0)
+                            {
+                                product = 0;//number is not prime, therefore wrong answer
+                            }
+
+                        }
                         product *= number;
                     }
                     result = product;
@@ -183,8 +209,8 @@ namespace FlashcardProgram
             time10kOperations.Stop();
             var dat = DateTime.Today.ToShortDateString();
             Console.WriteLine("Time Elapsed was " +time10kOperations.Elapsed.Seconds.ToString()+" seconds \nScore was "+points+"/"+totalQns);
-            File.AppendAllText("arithmeticStats", string.Format("\n{0};digits:{1};score:{2}/{3};{4};seconds:{5}", opType,
-                digits, points, totalQns, dat, time10kOperations.Elapsed.Seconds.ToString()));
+            File.AppendAllText("arithmeticStats", string.Format("\n{0};digits:{1};score:{2}/{3};{4};seconds:{5};minmax:{6}-{7}", opType,
+                digits, points, totalQns, dat, time10kOperations.Elapsed.Seconds.ToString(),minVal, maxVal));
             return points;
         }
     }

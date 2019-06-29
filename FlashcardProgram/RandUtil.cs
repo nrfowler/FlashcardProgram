@@ -112,14 +112,48 @@ namespace FlashcardProgram
             }
             return res;
         }
-        public static int RandInt(this object[] ob, int length, int minVal)
+        public static int RandInt(this object[] ob, int length, int minVal, int max = 0)
         {
             var finalInt = 0;
+            if (max == 0)
+            {
+                do
+                {
+                    lock (syncLock)
+                    { // synchronize
+                        finalInt = (int)ob[(random.Next()) % (ob.Length)];
+                    }
+                    if (length == 1)
+                        continue;
+                    lock (syncLock)
+                    { // synchronize
+                        finalInt += 10 * (int)ob[(random.Next()) % (ob.Length)];
+                    }
+                    if (length == 2)
+                        continue;
+                    lock (syncLock)
+                    { // synchronize
+                        finalInt += 100 * (int)ob[(random.Next()) % (ob.Length)];
+                    }
+                    if (length == 3)
+                        continue;
+                    lock (syncLock)
+                    { // synchronize
+                        finalInt += 1000 * (int)ob[(random.Next()) % (ob.Length)];
+                    }
+                    if (length == 4)
+                        continue;
+
+                } while (finalInt < minVal);
+                return finalInt;
+            }
+            
+
             do
             {
                 lock (syncLock)
                 { // synchronize
-                    finalInt += (int)ob[(random.Next()) % (ob.Length)];
+                    finalInt = (int)ob[(random.Next()) % (ob.Length)];
                 }
                 if (length == 1)
                     continue;
@@ -142,7 +176,7 @@ namespace FlashcardProgram
                 if (length == 4)
                     continue;
 
-            } while (finalInt < minVal);
+            } while (finalInt < minVal || finalInt>=max);
             return finalInt;
 
 
