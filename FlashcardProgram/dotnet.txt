@@ -1,0 +1,47 @@
+﻿sFile = ActiveWorkbook.Path & "\test.htm"
+Do While WorksheetFunction.CountA(Rows(iRow)) > 0
+If Not IsEmpty(Cells(iRow,1)) Then
+Shell "hh " & vbLf & sFile, vbMaximizedFocus
+LastColumn = Cells.Find(What:= "*", After:=Range("A1"), SearchOrder:=xlByColumns, SearchDirection:=xlPrevios).Column + 1
+With Range("A1:A" & Cells(Rows.Count, 1).End(xlUp).Row)
+.SpecialCells(xlCellTypeVisible).Offset(0, LastColumn -1).Value = 1
+ActiveSheet.ShowAllData
+Columns(LastColumn).SpecialCells(xlCellTypeBlanks).EntireRow.Delete
+.ScreenUpdating = True
+https://www.youtube.com/channel/UCbfYPyITQ-7l4upoX8nvctg
+MyPos = Instr(4, SearchString, SearchChar, 1) 
+MyStr = Left(AnyString, 7)   ' Returns "Hello W".
+MidMbcs = StrConv(MidB(StrConv(str, vbFromUnicode), start, length), vbUnicode)
+x = StrConv("ABCDEFG", vbFromUnicode) ' Convert string.
+MyStr = Format(5459.4, "##,##0.00") ' Returns "5,459.40".
+MyStr = Format(334.9, "###0.00") ' Returns "334.90".
+MyStr = Format(5, "0.00%") ' Returns "500.00%".
+MyStr = Format("HELLO", "<") ' Returns "hello".
+MyStr = Format("This is it", ">") ' Returns "THIS IS IT".
+MyStr1 = "ABCD": MyStr2 = "abcd" ' Define variables.
+MyComp = StrComp(MyStr1, MyStr2, 1) ' Returns 0.
+MyNumber = Asc("Apple") ' Returns 65.
+MyString = String(10, "ABC") ' Returns "AAAAAAAAAA".
+Split(expression, [ delimiter, [ limit, [ compare ]]])
+RetVal = Shell("C:\WINDOWS\CALC.EXE", 1) ' Run Calculator.
+HArccosec(X) = Log((Sgn(X) * Sqr(X * X + 1) + 1) / X)
+FormatCurrency(Expression, [ NumDigitsAfterDecimal, [ IncludeLeadingDigit, [ UseParensForNegativeNumbers, [ GroupDigits ]]]])
+sql string fns: ascii, char, charindex, concat, concat_ws, difference, format, left, len, lower, ltrim, nchar, patindex, quotename, replace, replicate
+what are the VB System GC methods; GetTotalMemory, WaitForPendingFinalizers, ReRegisterForFinalize, Collect, KeepAlive
+sql string fns: reverse, right, rtrim, soundex, space, str, string_agg, string_escape, string_split, suff, substring, translate, trim, unicode, upper
+js string methods: charAt, charcodeAt, codePointAt, concat, includes, endsWith, indexOf, lastIndexOf, localeCompare, match, matchAll.js string methods: normalize, padEnd, padStart, repeat, replace, search, slice, split, startsWith, substr, substring, toLocaleLowerCaes
+js string methods: toLocalseUpperCase, toLowerCase, toSource, toString, toUpperCase, trim, stringStart, trimEnd, valueOf
+IIf(expr, truepart, falsepart)
+Open "TESTFILE" For Binary As #1 
+Join(sourcearray, [ delimiter ])
+Choose(index, choice-1, [ choice-2, ..., [ choice-n ]] )
+Sub ShowFreeSpace(drvPath)
+    Set fs = CreateObject("Scripting.FileSystemObject")
+    Set d = fs.GetDrive(fs.GetDriveName(drvPath))
+    s = "Drive " & UCase(drvPath) & " - " 
+    s = s & d.VolumeName  & vbCrLf
+    s = s & "Free Space: " & FormatNumber(d.FreeSpace/1024, 0) 
+Dim as Object causes late binding.
+Set ExcelSheet = CreateObject("Excel.Sheet")
+Range.Find (What, After, LookIn, LookAt, SearchOrder, SearchDirection, MatchCase, MatchByte, SearchFormat)
+XlFindLookIn constants: xlFormulas, xlValues, xlComments, or xlCommentsThreaded.

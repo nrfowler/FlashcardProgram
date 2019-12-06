@@ -34,6 +34,8 @@ namespace HelloWorld
             }
             else if (args[0] == "fc")
                 FlashCard.FlashCards();
+            else if (args[0] == "tg")
+                TypingGame.TypingGameStart();
             else if (args[0] == "ph")
             {
                 MneumonicSystem.Phonetic();
