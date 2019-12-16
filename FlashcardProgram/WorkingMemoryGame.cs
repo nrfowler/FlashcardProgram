@@ -20,7 +20,7 @@ namespace FlashcardProgram
         public static bool MentalMath(int level = 0)
         {
             //currently just a square of int. will have nxm, and decimals for higher points
-            int top = RandomInteger(3, 50, level);
+            int top = RandomInteger(11, 50, level);
             //int bottom = RandomInteger(3, 50, level);
             Console.WriteLine("Compute: " + top.ToString() + "*" + top.ToString() + ": ");
             if (int.Parse(Console.ReadLine()) == top * top)

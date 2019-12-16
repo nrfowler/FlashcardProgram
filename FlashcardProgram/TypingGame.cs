@@ -1,6 +1,7 @@
 ﻿using HelloWorld;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -35,7 +36,8 @@ namespace FlashcardProgram
                 }
             }
             deck.cards = deck.cards.Randomize();
-            var points = 0;
+            double points = 0;
+            Stopwatch sw = Stopwatch.StartNew();
             foreach (FlashCard c in deck.cards)
             {
                 //Question must contain one word
@@ -46,16 +48,18 @@ namespace FlashcardProgram
                 {
                     var taa = "";
                     var i = 0;
+                    
                     while ( ! taa.Equals(c.Question.Trim()) && i < 3)
                     {
                         Console.WriteLine("\n{0}", c.Question);
+                        sw.Restart(); 
                         taa = Console.ReadLine();
-                        if (i == 0) {
-                            points++;
-                            Console.WriteLine("\n{0}",points);
-                            i++;
+                        sw.Stop();
+                        if (taa.Equals(c.Question.Trim()))
+                        {
+                            points += 1 / sw.Elapsed.TotalSeconds;
+                            Console.WriteLine("points: \n{0}", points);
                         }
-                        else
                             i++;
                     }
                 }

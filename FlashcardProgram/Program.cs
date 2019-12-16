@@ -23,12 +23,13 @@ namespace HelloWorld
             {
                 
                     int foo = intList.RandInt(3, 0);
-                    SpeedReading.SpacedReading("C:\\Users\\Nathan\\OneDrive\\data\\Dropbox\\journal\\rlzn.txt", foo, foo +5);
-                    MneumonicSystem.Phonetic();
-                    WorkingMemoryGame.Play(10, 2, true);//keep constant at this value for accurate stats
+                    //SpeedReading.SpacedReading("C:\\Users\\Nathan\\OneDrive\\data\\Dropbox\\journal\\rlzn.txt", foo, foo +5);
+                    //MneumonicSystem.Phonetic();
+                    TypingGame.TypingGameStart();
+                    //WorkingMemoryGame.Play(5, 1, true);//keep constant at this value for accurate stats
                     //MneumonicSystem.Celebrity();
-                    Arithmetic.Game(10, 2, 11,20);
-                    Console.WriteLine("Do an exercise offline");
+                    //Arithmetic.Game(10, 2, 11, 20);
+                    Console.WriteLine("Do a plank or prone y");
                     Timer();
                 
             }

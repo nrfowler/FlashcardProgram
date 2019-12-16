@@ -2,14 +2,23 @@
 Do While WorksheetFunction.CountA(Rows(iRow)) > 0
 If Not IsEmpty(Cells(iRow,1)) Then
 Shell "hh " & vbLf & sFile, vbMaximizedFocus
-LastColumn = Cells.Find(What:= "*", After:=Range("A1"), SearchOrder:=xlByColumns, SearchDirection:=xlPrevios).Column + 1
+LastColumn = Cells.Find(What:= "*", After:=Range("A1"), SearchOrder:=xlByColumns, SearchDirection:=xlPrevious).Column + 1
 With Range("A1:A" & Cells(Rows.Count, 1).End(xlUp).Row)
 .SpecialCells(xlCellTypeVisible).Offset(0, LastColumn -1).Value = 1
 ActiveSheet.ShowAllData
 Columns(LastColumn).SpecialCells(xlCellTypeBlanks).EntireRow.Delete
 .ScreenUpdating = True
-https://www.youtube.com/channel/UCbfYPyITQ-7l4upoX8nvctg
+acpr: who is on the account, mailing address, relationship status codes, whehre and when the acct opened
+CURM: customer remarks, read remarks/notes about customer and account, manually add notes if cacs unavailable
+STMT: retrieve accurate balance, transact on activity
+XENI: acct or product information, hard holds, pledges, stop payments
+hard holds: lists individual hard holds, type of hard hold
+CUPR: customer profile, dustomer demographic information, name, phone, employer, SSN, customer remarks
 MyPos = Instr(4, SearchString, SearchChar, 1) 
+Emergency oats, kale, and fish diet to clear arteries.
+Emergency focus on typing (every job), rebuttals, and VBA syntax.
+VB.NET Educational Software for high schools.
+VBA is the only legal programming language for the job I do.
 MyStr = Left(AnyString, 7)   ' Returns "Hello W".
 MidMbcs = StrConv(MidB(StrConv(str, vbFromUnicode), start, length), vbUnicode)
 x = StrConv("ABCDEFG", vbFromUnicode) ' Convert string.
