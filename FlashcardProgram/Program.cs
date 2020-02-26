@@ -21,16 +21,13 @@ namespace HelloWorld
         {
             if(args.Length==0)
             {
-                
-                    int foo = intList.RandInt(3, 0);
-                    //SpeedReading.SpacedReading("C:\\Users\\Nathan\\OneDrive\\data\\Dropbox\\journal\\rlzn.txt", foo, foo +5);
                     //MneumonicSystem.Phonetic();
-                    TypingGame.TypingGameStart();
-                    //WorkingMemoryGame.Play(5, 1, true);//keep constant at this value for accurate stats
+                    //TypingGame.TypingGameStart();
+                    WorkingMemoryGame.Play(10, 3, true);//keep constant at this value for accurate stats
                     //MneumonicSystem.Celebrity();
                     //Arithmetic.Game(10, 2, 11, 20);
-                    Console.WriteLine("Do a plank or prone y");
-                    Timer();
+                    //Console.WriteLine("Do a plank or prone y");
+                    //Timer();
                 
             }
             else if (args[0] == "fc")

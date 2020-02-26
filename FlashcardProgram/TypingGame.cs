@@ -55,12 +55,12 @@ namespace FlashcardProgram
                         sw.Restart(); 
                         taa = Console.ReadLine();
                         sw.Stop();
+                        i++;
                         if (taa.Equals(c.Question.Trim()))
                         {
                             points += 1 / sw.Elapsed.TotalSeconds;
-                            Console.WriteLine("points: \n{0}", points);
+                            Console.WriteLine("points: \n{0}\naverage: {1}", points,points /i);
                         }
-                            i++;
                     }
                 }
 
