@@ -1,4 +1,7 @@
-﻿sFile = ActiveWorkbook.Path & "\test.htm"
+﻿03948fjd0282
+587624987623
+56365897351
+sFile = ActiveWorkbook.Path & "\test.htm"
 Do While WorksheetFunction.CountA(Rows(iRow)) > 0
 If Not IsEmpty(Cells(iRow,1)) Then
 Shell "hh " & vbLf & sFile, vbMaximizedFocus
@@ -8,22 +11,16 @@ With Range("A1:A" & Cells(Rows.Count, 1).End(xlUp).Row)
 ActiveSheet.ShowAllData
 Columns(LastColumn).SpecialCells(xlCellTypeBlanks).EntireRow.Delete
 .ScreenUpdating = True
-acpr: who is on the account, mailing address, relationship status codes, whehre and when the acct opened
-CURM: customer remarks, read remarks/notes about customer and account, manually add notes if cacs unavailable
-STMT: retrieve accurate balance, transact on activity
-XENI: acct or product information, hard holds, pledges, stop payments
 hard holds: lists individual hard holds, type of hard hold
-CUPR: customer profile, dustomer demographic information, name, phone, employer, SSN, customer remarks
 MyPos = Instr(4, SearchString, SearchChar, 1) 
 Emergency oats, kale, and fish diet to clear arteries.
 Emergency focus on typing (every job), rebuttals, and VBA syntax.
-VB.NET Educational Software for high schools.
-VBA is the only legal programming language for the job I do.
 MyStr = Left(AnyString, 7)   ' Returns "Hello W".
 MidMbcs = StrConv(MidB(StrConv(str, vbFromUnicode), start, length), vbUnicode)
 x = StrConv("ABCDEFG", vbFromUnicode) ' Convert string.
 MyStr = Format(5459.4, "##,##0.00") ' Returns "5,459.40".
 MyStr = Format(334.9, "###0.00") ' Returns "334.90".
+579426518762
 MyStr = Format(5, "0.00%") ' Returns "500.00%".
 MyStr = Format("HELLO", "<") ' Returns "hello".
 MyStr = Format("This is it", ">") ' Returns "THIS IS IT".
@@ -54,3 +51,4 @@ Dim as Object causes late binding.
 Set ExcelSheet = CreateObject("Excel.Sheet")
 Range.Find (What, After, LookIn, LookAt, SearchOrder, SearchDirection, MatchCase, MatchByte, SearchFormat)
 XlFindLookIn constants: xlFormulas, xlValues, xlComments, or xlCommentsThreaded.
+6588965289

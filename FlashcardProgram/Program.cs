@@ -7,6 +7,7 @@ using FlashcardProgram.Properties;
 using static FlashcardProgram.RandUtil;
 using System.Diagnostics;
 using FlashcardProgram;
+using System.Windows.Forms;
 
 namespace HelloWorld
 {
@@ -19,19 +20,24 @@ namespace HelloWorld
 
         static void Main(string[] args)
         {
-            if(args.Length==0)
+            var PH = new PharmacyForm();
+            Application.Run(PH);
+            //FlashCard.Get1FC(PH);
+            if (args.Length==0)
             {
-                    //MneumonicSystem.Phonetic();
-                    //TypingGame.TypingGameStart();
-                    WorkingMemoryGame.Play(10, 3, true);//keep constant at this value for accurate stats
-                    //MneumonicSystem.Celebrity();
-                    //Arithmetic.Game(10, 2, 11, 20);
-                    //Console.WriteLine("Do a plank or prone y");
-                    //Timer();
+                //MneumonicSystem.Phonetic();
+                //TypingGame.TypingGameStart();
+                //WorkingMemoryGame.Play(10, 3, true);//keep constant at this value for accurate stats
+                //Arithmetic.Game(10, 2, 11, 20);
                 
+                //Console.WriteLine("Do a plank or prone y");
+                //Timer();
+                //FlashCard.FlashCards();
+                //if scores increase run a rnd porn file
+
             }
             else if (args[0] == "fc")
-                FlashCard.FlashCards();
+                new Deck("").DisplayAllFC();
             else if (args[0] == "tg")
                 TypingGame.TypingGameStart();
             else if (args[0] == "ph")
@@ -80,7 +86,7 @@ namespace HelloWorld
         private static void OneRandRead()
         {
             int foo = intList.RandInt(3, 0);
-            SpeedReading.RandRead("C:\\Users\\Nathan\\OneDrive\\data\\Dropbox\\journal\\rlzn.txt", foo, foo + 5);
+            WorkingMemoryGame.DisplayJournal();
         }
 
         private static void TestP()

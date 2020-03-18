@@ -63,7 +63,7 @@ namespace FlashcardProgram
                     "Subtract, Squares(2), Modulus\nFactor, Percentage\nLog, Power(pow)");
                 opType = Console.ReadLine();
                 Stopwatch time10kOperations = Stopwatch.StartNew();
-                 ScoredRounds(al,totalQns, maxDigits, minVal, maxVal,opType, time10kOperations);
+                 score +=ScoredRounds(al,totalQns, maxDigits, minVal, maxVal,opType, time10kOperations);
                 time10kOperations.Reset();
 
 
@@ -76,12 +76,30 @@ namespace FlashcardProgram
             //import phonetic.txt
             //random number and then append to text file
         }
-
-        public static void ScoredRounds(ArithmeticLoop ld, int totalQns, int maxDigits, int minVal, int maxVal,string opType, Stopwatch w)
+        public static int Play1RndArithmeticGame(int totalQns, int maxDigits, int minVal, int maxVal)
         {
+            var score = 0;
+            string opType = "";
+
+            ArithmeticLoop al = new ArithmeticLoop(PlayRound);
+            
+                var types = new String[] { "a", "m", "s", "sa"};
+                opType = types[new Random().Next(0, types.Length-1)];
+                Stopwatch time10kOperations = Stopwatch.StartNew();
+                score  += al( totalQns, maxDigits, minVal, maxVal, opType, time10kOperations);
+                time10kOperations.Reset();
+            Console.WriteLine("{0} points", score);
+            
+                return score;
+
+            
+        }
+        public static int ScoredRounds(ArithmeticLoop ld, int totalQns, int maxDigits, int minVal, int maxVal,string opType, Stopwatch w)
+        {
+            int pts = 0;
             do
             {
-                ld(totalQns, maxDigits, minVal, maxVal, opType, w);
+                pts+=ld(totalQns, maxDigits, minVal, maxVal, opType, w);
                 Console.WriteLine("Continue?");
                 var foo = Console.ReadLine();
 
@@ -89,6 +107,7 @@ namespace FlashcardProgram
                     break;
                 Console.Clear();
             } while (true);
+            return pts;
             
         }
 
@@ -114,7 +133,7 @@ namespace FlashcardProgram
                     sum = 0;
                     for(int it=0;it<5; it++)
                     {
-                        operands[it]= opType=="sa"? intList.RandInt(maxDigits, minVal): intList.RandInt(1, 1);
+                        operands[it]= opType=="sa"? intList.RandInt(maxDigits, minVal): new Random().Next(1,9);
                         string OS = it==0? " " : OpType(opType);
                         Console.WriteLine("{0}{1,2}",OS, operands[it]);
                         product *= operands[it];
@@ -129,7 +148,7 @@ namespace FlashcardProgram
                 else
                 {
                     
-                     firstRandom = intList.RandInt(maxDigits, minVal,maxVal);
+                     firstRandom = new Random().Next(minVal,maxVal);
                      pct = 0;
                      secondRandom = 0;
                     if (opType == "2")
@@ -138,12 +157,12 @@ namespace FlashcardProgram
                         pct = ((int)(new double().Rnd() * 100)) / 100.00;
                     else if (opType == "pow")
                     {
-                         _base= intList.RandInt(1, 1,5);
-                         power = intList.RandInt(1, 3,5);
+                         _base= new Random().Next( 1,5);
+                         power = new Random().Next(3,5);
 
                     }
                     else
-                        secondRandom = intList.RandInt(maxDigits, minVal,firstRandom-1);//ensure subtraction yields no negatives
+                        secondRandom = new Random().Next(1,firstRandom-1);//ensure subtraction yields no negatives
 
                     if (opType == "2")
                         Console.WriteLine("{0}^2 = ", firstRandom);

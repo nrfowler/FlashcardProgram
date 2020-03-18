@@ -12,7 +12,7 @@ namespace FlashcardProgram
 {
     class TypingGame
     {
-        public static void TypingGameStart()
+        public static double TypingGameStart()
         {
             Console.WriteLine("Type without errors: ");
             FileStream fs = new FileStream("dotnet.txt", FileMode.Open);
@@ -21,7 +21,7 @@ namespace FlashcardProgram
             using (StreamReader sr = new StreamReader(fs))
             {
                 String line;
-                int i = 0;
+                
                 FlashCard card = new FlashCard();
                 while ((line = sr.ReadLine()) != null)
                 {
@@ -37,34 +37,37 @@ namespace FlashcardProgram
             }
             deck.cards = deck.cards.Randomize();
             double points = 0;
+
             Stopwatch sw = Stopwatch.StartNew();
-            foreach (FlashCard c in deck.cards)
+            for (int i = 0; i < 2; i++)
             {
                 //Question must contain one word
-
+                FlashCard c = (FlashCard)deck.cards[i];
                 Regex rx = new Regex(@"\b([a-zA-Z]+)\b");
 
                 if (rx.IsMatch(c.Question))
                 {
                     var taa = "";
-                    var i = 0;
+                    int j = 0;
                     
-                    while ( ! taa.Equals(c.Question.Trim()) && i < 3)
+                    while ( ! taa.Equals(c.Question.Trim()) && j < 1)
                     {
                         Console.WriteLine("\n{0}", c.Question);
                         sw.Restart(); 
                         taa = Console.ReadLine();
                         sw.Stop();
-                        i++;
+                        j++;
                         if (taa.Equals(c.Question.Trim()))
                         {
-                            points += 1 / sw.Elapsed.TotalSeconds;
+                            points += 1;
+                            /// sw.Elapsed.TotalSeconds;
                             Console.WriteLine("points: \n{0}\naverage: {1}", points,points /i);
                         }
                     }
                 }
 
             }
+        return points;
         }
 
     }

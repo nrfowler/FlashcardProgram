@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -26,7 +27,8 @@ namespace FlashcardProgram
             Thread.Sleep(200);
             int bottom = RandomInteger(5, 19, level);
             Console.WriteLine("Compute: " + top.ToString() + "*" + bottom.ToString() + ": ");
-            if (int.Parse(Console.ReadLine()) == top * bottom)
+            int result;
+            if (int.TryParse(Console.ReadLine(),out result) && result == top * bottom)
                 return true;
             return false;
         }
@@ -93,6 +95,10 @@ namespace FlashcardProgram
                     Console.WriteLine("Your lifetime average is " + String.Format("{0:0.##}", Settings.Default["LifetimeAverage"]));
                     Settings.Default["LastSets"] = total;
                     Settings.Default.Save();
+                    if((double)Settings.Default["LastAverage"] > (double)Settings.Default["PenultimateAverage"])
+                    {
+                        //view porn
+                    }
                 }
                 Console.WriteLine("New Game (y/n)?");
 
@@ -112,15 +118,34 @@ namespace FlashcardProgram
             ArrayList PackageIDList;
             CreatePackageList(numPackages, out PackageIDList);
             Console.Clear();
-            points = MultRound(points);
+            points = Arithmetic.Play1RndArithmeticGame(10, 2, 11, 20);
             points = PackageGame(points, PackageIDList);
-            Console.Clear();
-            int foo = (int)Settings.Default["rlznptr"];
-            SpeedReading.SpacedReading("C:\\Users\\Nathan\\OneDrive\\data\\Dropbox\\journal\\rlzn.txt", foo, foo + 4);
-            Settings.Default["rlznptr"] = foo + 4;
-            Console.ReadLine();
+            points += (int)TypingGame.TypingGameStart();
+            DisplayJournal();
             Console.WriteLine("You scored " + points.ToString());
             return points;
+        }
+
+        public static void DisplayJournal()
+        {
+            Console.Clear();
+
+            int foo = (int)Settings.Default["rlznptr"];
+            Random rand = new Random();
+            var RMD = "C://Users//Nathan//OneDrive//reading";
+            List<string> files = Directory.GetFiles(RMD).Where(F => F.ToLower().EndsWith(".txt")).ToList();
+            string filetemp = files[rand.Next(0, files.Count)];
+            int lengthFile = File.ReadAllLines(filetemp).Length;
+            if (lengthFile < 10) return;
+            if (filetemp != "rlzn.txt") foo = new Random().Next(0, lengthFile - 5);
+            Console.WriteLine(filetemp.Substring(37));
+
+            int test = (int)(new Random().Next(0, 1));
+            if (test == 1) SpeedReading.RandRead(filetemp, foo, foo + 4);
+            else SpeedReading.SpacedReading(filetemp, foo, foo + 4);
+            if (filetemp == "rlzn.txt") Settings.Default["rlznptr"] = foo + 4;
+            Console.ReadLine();
+            Console.Clear();
         }
 
         private static int PackageGame(int points, ArrayList PackageIDList)
